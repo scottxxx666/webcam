@@ -5,6 +5,7 @@
 </head>
 <body>
     <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
     <script type="text/javascript">
         // Grab elements, create settings, etc.
         var video = document.getElementById('video');
@@ -17,6 +18,15 @@
                 video.play();
             });
         }
+
+        // Elements for taking the snapshot
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+
+        // Trigger photo take
+        setInterval(function() {
+            context.drawImage(video, 0, 0, 640, 480);
+        }, 1000);
     </script>
 </body>
 </html>
