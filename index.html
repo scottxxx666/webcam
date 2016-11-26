@@ -4,8 +4,18 @@
     <title>Webcam</title>
 </head>
 <body>
-    <input type="file" capture="camera" accept="image/*" id="takePictureField">
-    <video id="video" width="640" height="480" autoplay></video>
+    <style type="text/css">
+        #v_div {
+            background-image: url("mario.png");
+            background-position: right bottom;
+            background-size : contain;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <!-- <input type="file" capture="camera" accept="image/*" id="takePictureField"> -->
+    <div id="v_div">
+        <video id="video" width="640" height="480" autoplay></video>
+    </div>
     <button id="snap">Snap Photo</button>
     <canvas id="canvas" width="640" height="480"></canvas>
 
