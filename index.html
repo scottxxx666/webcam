@@ -5,12 +5,19 @@
 </head>
 <body>
     <style type="text/css">
-        #v_div {
+   /*     #v_div {
             background-image: url("mario.png");
             background-position: right bottom;
             background-size : contain;
             background-repeat: no-repeat;
             display: inline-block;
+            z-index: 999;
+        }*/
+
+        #mario {
+            position: relative;
+            width: 200px;
+            right: 180px;
             z-index: 999;
         }
 
@@ -23,6 +30,7 @@
     <!-- <input type="file" capture="camera" accept="image/*" id="takePictureField"> -->
     <div id="v_div">
         <video id="video" width="640" height="480" autoplay></video>
+        <img id="mario" src="mario.png">
     </div>
     <button id="snap">Snap Photo</button>
     <canvas id="canvas" width="640" height="480"></canvas>
@@ -43,10 +51,12 @@
         // Elements for taking the snapshot
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
+        var mario = document.getElementById("mario");
 
         // Trigger photo take
         document.getElementById("snap").addEventListener("click", function() {
             context.drawImage(video, 0, 0, 640, 480);
+            context.drawImage(mario, 0, 0);
         });
     </script>
 </body>
