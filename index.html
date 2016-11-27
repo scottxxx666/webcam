@@ -5,14 +5,14 @@
 </head>
 <body>
     <style type="text/css">
-   /*     #v_div {
-            background-image: url("mario.png");
+        #v_div {
+           /* background-image: url("mario.png");
             background-position: right bottom;
             background-size : contain;
-            background-repeat: no-repeat;
+            background-repeat: no-repeat;*/
             display: inline-block;
-            z-index: 999;
-        }*/
+            /*z-index: 999;*/
+        }
 
         #mario {
             position: relative;
@@ -53,10 +53,13 @@
         var context = canvas.getContext('2d');
         var mario = document.getElementById("mario");
 
+// drawing = new Image();
+// drawing.src="mario.png";
+
         // Trigger photo take
         document.getElementById("snap").addEventListener("click", function() {
             context.drawImage(video, 0, 0, 640, 480);
-            context.drawImage(mario, 0, 0);
+            context.drawImage(mario, 440, 214, 200, 266);
         });
     </script>
 </body>
