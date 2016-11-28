@@ -60,28 +60,18 @@
         var context = canvas.getContext('2d');
         var mario = document.getElementById("mario");
 
-// drawing = new Image();
-// drawing.src="mario.png";
-
         // Trigger photo take
         document.getElementById("snap").addEventListener("click", function() {
             context.drawImage(video, 0, 0, 640, 480);
             context.drawImage(mario, 460, 214, 200, 266);
-            // context.drawImage(mario, 0, 0, 440, 214, 200, 266);
         });
-
-        // document.getElementById("save").addEventListener("click", function() {
-        //     var data_url = canvas.toDataURL();
-        //     window.open(data_url);
-        // });
 
         var download_btn = document.getElementById("download");
         document.getElementById("download").addEventListener("click", function() {
             var data_url = canvas.toDataURL();
-            download_btn.href=data_url;
+            download_btn.href = data_url;
         });
 
-        download
     </script>
 </body>
 </html>
