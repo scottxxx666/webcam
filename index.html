@@ -26,6 +26,11 @@
             background-color: black;
             z-index: -1;
         }
+
+        #canvas {
+            background-color: black;
+        }
+
     </style>
     <!-- <input type="file" capture="camera" accept="image/*" id="takePictureField"> -->
     <div id="v_div">
@@ -34,7 +39,9 @@
     </div>
     <button id="snap">Snap Photo</button>
     <canvas id="canvas" width="640" height="480"></canvas>
-
+    <a id="download" download="test.jpg" title="title">
+        <button id="save">Save</button>
+    </a>
     <script type="text/javascript">
         // Grab elements, create settings, etc.
         var video = document.getElementById('video');
@@ -59,8 +66,22 @@
         // Trigger photo take
         document.getElementById("snap").addEventListener("click", function() {
             context.drawImage(video, 0, 0, 640, 480);
-            context.drawImage(mario, 440, 214, 200, 266);
+            context.drawImage(mario, 460, 214, 200, 266);
+            // context.drawImage(mario, 0, 0, 440, 214, 200, 266);
         });
+
+        // document.getElementById("save").addEventListener("click", function() {
+        //     var data_url = canvas.toDataURL();
+        //     window.open(data_url);
+        // });
+
+        var download_btn = document.getElementById("download");
+        document.getElementById("download").addEventListener("click", function() {
+            var data_url = canvas.toDataURL();
+            download_btn.href=data_url;
+        });
+
+        download
     </script>
 </body>
 </html>
