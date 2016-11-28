@@ -31,9 +31,14 @@
             background-color: black;
         }
 
+        #error {
+            display: none;
+        }
+
     </style>
     <!-- <input type="file" capture="camera" accept="image/*" id="takePictureField"> -->
     <div id="v_div">
+        <h1 id="error">Sorry, your browser is not supported</h1>
         <video id="video" width="640" height="480" autoplay></video>
         <img id="mario" src="mario.png">
     </div>
@@ -53,6 +58,8 @@
                 video.src = window.URL.createObjectURL(stream);
                 video.play();
             });
+        } else {
+            document.getElementById('error').style.display = 'block';
         }
 
         // Elements for taking the snapshot
