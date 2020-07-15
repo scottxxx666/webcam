@@ -49,7 +49,7 @@
 </a>
 <script type="text/javascript">
   // Grab elements, create settings, etc.
-  var video = document.getElementById('video');
+  const video = document.getElementById('video');
 
   async function initVideo() {
     const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -71,9 +71,9 @@
   }
 
   // Elements for taking the snapshot
-  var canvas = document.getElementById('canvas');
-  var context = canvas.getContext('2d');
-  var mario = document.getElementById("mario");
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
+  const mario = document.getElementById("mario");
 
   // Trigger photo take
   document.getElementById("snap").addEventListener("click", function () {
@@ -81,9 +81,9 @@
     context.drawImage(mario, 460, 214, 200, 266);
   });
 
-  var download_btn = document.getElementById("download");
+  const download_btn = document.getElementById("download");
   document.getElementById("download").addEventListener("click", function () {
-    var data_url = canvas.toDataURL();
+    const data_url = canvas.toDataURL();
     download_btn.href = data_url;
   });
 
