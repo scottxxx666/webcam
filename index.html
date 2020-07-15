@@ -4,81 +4,89 @@
     <title>Webcam</title>
 </head>
 <body>
-    <style type="text/css">
-        #v_div {
-           /* background-image: url("mario.png");
-            background-position: right bottom;
-            background-size : contain;
-            background-repeat: no-repeat;*/
-            display: inline-block;
-            /*z-index: 999;*/
-        }
+<style type="text/css">
+    #v_div {
+        /* background-image: url("mario.png");
+         background-position: right bottom;
+         background-size : contain;
+         background-repeat: no-repeat;*/
+        display: inline-block;
+        /*z-index: 999;*/
+    }
 
-        #mario {
-            position: relative;
-            width: 200px;
-            right: 180px;
-            z-index: 999;
-        }
+    #mario {
+        position: relative;
+        width: 200px;
+        right: 180px;
+        z-index: 999;
+    }
 
-        #video {
-            position:relative;
-            background-color: black;
-            z-index: -1;
-        }
+    #video {
+        position: relative;
+        background-color: black;
+        z-index: -1;
+    }
 
-        #canvas {
-            background-color: black;
-        }
+    #canvas {
+        background-color: black;
+    }
 
-        #error {
-            display: none;
-        }
+    #error {
+        display: none;
+    }
 
-    </style>
-    <!-- <input type="file" capture="camera" accept="image/*" id="takePictureField"> -->
-    <div id="v_div">
-        <h1 id="error">Sorry, your browser is not supported</h1>
-        <video id="video" width="640" height="480" autoplay></video>
-        <img id="mario" src="mario.png">
-    </div>
-    <button id="snap">Snap Photo</button>
-    <canvas id="canvas" width="640" height="480"></canvas>
-    <a id="download" download="test.jpg" title="title">
-        <button id="save">Save</button>
-    </a>
-    <script type="text/javascript">
-        // Grab elements, create settings, etc.
-        var video = document.getElementById('video');
+</style>
+<!-- <input type="file" capture="camera" accept="image/*" id="takePictureField"> -->
+<div id="v_div">
+    <h1 id="error">Sorry, your browser is not supported</h1>
+    <video autoplay height="480" id="video" width="640"></video>
+    <img id="mario" src="mario.png">
+</div>
+<button id="snap">Snap Photo</button>
+<canvas height="480" id="canvas" width="640"></canvas>
+<a download="test.jpg" id="download" title="title">
+    <button id="save">Save</button>
+</a>
+<script type="text/javascript">
+  // Grab elements, create settings, etc.
+  var video = document.getElementById('video');
 
-        // Get access to the camera!
-        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            // Not adding `{ audio: true }` since we only want video now
-            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-                video.src = window.URL.createObjectURL(stream);
-                video.play();
-            });
-        } else {
-            document.getElementById('error').style.display = 'block';
-        }
+  async function initVideo() {
+    const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+    if ('srcObject' in video) {
+      video.srcObject = mediaStream;
+    } else {
+      // Avoid using this in new browsers, as it is going away.
+      video.src = URL.createObjectURL(mediaStream);
+    }
+  }
 
-        // Elements for taking the snapshot
-        var canvas = document.getElementById('canvas');
-        var context = canvas.getContext('2d');
-        var mario = document.getElementById("mario");
+  // Get access to the camera!
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Not adding `{ audio: true }` since we only want video now
+    initVideo().then(e => video.play());
 
-        // Trigger photo take
-        document.getElementById("snap").addEventListener("click", function() {
-            context.drawImage(video, 0, 0, 640, 480);
-            context.drawImage(mario, 460, 214, 200, 266);
-        });
+  } else {
+    document.getElementById('error').style.display = 'block';
+  }
 
-        var download_btn = document.getElementById("download");
-        document.getElementById("download").addEventListener("click", function() {
-            var data_url = canvas.toDataURL();
-            download_btn.href = data_url;
-        });
+  // Elements for taking the snapshot
+  var canvas = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
+  var mario = document.getElementById("mario");
 
-    </script>
+  // Trigger photo take
+  document.getElementById("snap").addEventListener("click", function () {
+    context.drawImage(video, 0, 0, 640, 480);
+    context.drawImage(mario, 460, 214, 200, 266);
+  });
+
+  var download_btn = document.getElementById("download");
+  document.getElementById("download").addEventListener("click", function () {
+    var data_url = canvas.toDataURL();
+    download_btn.href = data_url;
+  });
+
+</script>
 </body>
 </html>
